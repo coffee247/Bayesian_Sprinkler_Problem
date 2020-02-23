@@ -7,8 +7,16 @@ import Bayesian
 
 class TestMain(unittest.TestCase):
 
-    ''' test for No None's in input values '''
+    ''' Test creation of bayesion object from class definition '''
+    def test_create_beysian_object(self):
+        raised = False
+        try:
+            mysprinkler = Bayesian.bayesian_sprinkler()
+        except:
+            raised = True
+        self.assertFalse(raised, 'Exception raised')
 
+    ''' test for No None's in input values '''
     def test_summing_out_FFF(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
@@ -57,6 +65,7 @@ class TestMain(unittest.TestCase):
         mask, removed = mysprinkler.makeMask(True, True, True)
         self.assertEqual(mysprinkler.pIsWet(mask, removed), 0.99)
 
+    ''' test for when None is in wetgrass place in input values '''
     def test_summing_out_FFN(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
@@ -81,6 +90,7 @@ class TestMain(unittest.TestCase):
         mask, removed = mysprinkler.makeMask(True, True, None)
         self.assertEqual(mysprinkler.pIsWet(mask, removed), 'Wetgrass must have a value (cannot be None)')
 
+    ''' test for when None is in rain place in input values '''
     def test_summing_out_FNF(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
@@ -105,6 +115,7 @@ class TestMain(unittest.TestCase):
         mask, removed = mysprinkler.makeMask(True, None, True)
         self.assertEqual(mysprinkler.pIsWet(mask, removed), 1.89)
 
+    ''' test for when None is in sprinkler place in input values '''
     def test_summing_out_NFF(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
@@ -129,6 +140,7 @@ class TestMain(unittest.TestCase):
         mask, removed = mysprinkler.makeMask(None, True, True)
         self.assertEqual(mysprinkler.pIsWet(mask, removed), 1.79)
 
+    ''' test for when None is in both sprinkler AND rain place in input values '''
     def test_summing_out_NNT(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
@@ -141,6 +153,7 @@ class TestMain(unittest.TestCase):
         mask, removed = mysprinkler.makeMask(None, None, False)
         self.assertEqual(mysprinkler.pIsWet(mask, removed), 1.0)
 
+    ''' test for when None is in both sprinkler AND wetgrass place in input values '''
     def test_summing_out_NTN(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
@@ -151,6 +164,19 @@ class TestMain(unittest.TestCase):
         mysprinkler = Bayesian.bayesian_sprinkler()
         #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
         mask, removed = mysprinkler.makeMask(None, False, None)
+        self.assertEqual(mysprinkler.pIsWet(mask, removed), 'Wetgrass must have a value (cannot be None)')
+
+    ''' test for when None is in both rain AND wetgrass place in input values '''
+    def test_summing_out_TNN(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(True, None, None)
+        self.assertEqual(mysprinkler.pIsWet(mask, removed), 'Wetgrass must have a value (cannot be None)')
+
+    def test_summing_out_FNN(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(False, None, None)
         self.assertEqual(mysprinkler.pIsWet(mask, removed), 'Wetgrass must have a value (cannot be None)')
 
 if __name__ == '__main__':
