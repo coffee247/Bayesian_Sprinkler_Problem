@@ -2,13 +2,14 @@ import json
 import re
 
 class bayesian_sprinkler():
-    config = dict()
-    boolvals = {}
+    config = dict() # holds all of the settings
+    boolvals = {0: "FFF", 1: "FFT", 2: "FTF", 3: "FTT", 4: "TFF", 5: "TFT", 6: "TTF", 7: "TTT"}
+    # boolvals is a dictionary we will use to convert decimal to binary IE: 5 = 101 = TFT
+
     def __init__(self):
         """ Create a new bayesian sprinnkler object """
         with open('probabilities.json') as json_data:
-            self.config = json.load(json_data)  # load database connection parameters from config.json
-        self.boolvals = {0: "FFF", 1: "FFT", 2: "FTF", 3: "FTT", 4: "TFF", 5: "TFT", 6: "TTF", 7: "TTT"}
+            self.config = json.load(json_data)  # load connection data from probabilities.json
 
     def makeMask(self, sprinkler, rain, wetgrass):
         nodelist = [sprinkler, rain, wetgrass]
