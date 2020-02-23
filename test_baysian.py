@@ -16,6 +16,56 @@ class TestMain(unittest.TestCase):
             raised = True
         self.assertFalse(raised, 'Exception raised')
 
+    ''' Test creation of mask from user input '''
+    def test_create_mask_FFF(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(False, False, False)
+        self.assertEqual(mask, 0)
+
+    def test_create_mask_FFT(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(False, False, True)
+        self.assertEqual(mask, 1)
+
+    def test_create_mask_FTF(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(False, True, False)
+        self.assertEqual(mask, 2)
+
+    def test_create_mask_FTT(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(False, True, True)
+        self.assertEqual(mask, 3)
+
+    def test_create_mask_TFF(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(True, False, False)
+        self.assertEqual(mask, 4)
+
+    def test_create_mask_TFT(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(True, False, True)
+        self.assertEqual(mask, 5)
+
+    def test_create_mask_TTF(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(True, True, False)
+        self.assertEqual(mask, 6)
+
+    def test_create_mask_TTT(self):
+        mysprinkler = Bayesian.bayesian_sprinkler()
+        #    mask = mysprinkler.makeMask(sprinkler=True, rain=False, wetGrass=None)
+        mask, removed = mysprinkler.makeMask(True, True, True)
+        self.assertEqual(mask, 7)
+
+
     ''' test for No None's in input values '''
     def test_summing_out_FFF(self):
         mysprinkler = Bayesian.bayesian_sprinkler()
